@@ -4,7 +4,7 @@ import "time"
 
 type Emulator struct {
 	display *Display
-	buffer  []byte
+	buffer  [BufferSize]byte
 }
 
 func New(d *Display) *Emulator {

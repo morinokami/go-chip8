@@ -7,12 +7,6 @@ import (
 	"golang.org/x/image/colornames"
 )
 
-const (
-	displayWidth  = 640
-	displayHeight = 320
-	scale         = 10
-)
-
 type Display struct {
 	win *pixelgl.Window
 }
@@ -24,7 +18,7 @@ func NewDisplay() *Display {
 func (d *Display) Init() {
 	cfg := pixelgl.WindowConfig{
 		Title:  "CHIP-8",
-		Bounds: pixel.R(0, 0, displayWidth, displayHeight),
+		Bounds: pixel.R(0, 0, DisplayWidth, DisplayHeight),
 		VSync:  true,
 	}
 
@@ -39,20 +33,22 @@ func (d *Display) Run(f func()) {
 	pixelgl.Run(f)
 }
 
-func (d *Display) Render(buf []byte) {
+func (d *Display) Render(buf [BufferSize]byte) {
 	d.win.Clear(colornames.Black)
 
 	imd := imdraw.New(nil)
-	x := 1.0
-	y := 2.0
-	imd.Color = colornames.Pink
-	imd.Push(pixel.V(x*scale, displayHeight-(y*scale)), pixel.V((x+1)*scale, displayHeight-((y+1)*scale)))
-	imd.Rectangle(0)
-	x = 63.0
-	y = 31.0
-	imd.Color = colornames.Pink
-	imd.Push(pixel.V(x*scale, displayHeight-(y*scale)), pixel.V((x+1)*scale, displayHeight-((y+1)*scale)))
-	imd.Rectangle(0)
+	for i, b := range buf {
+		if b == 1 {
+			x := float64(i % 64)
+			y := float64(i / 64)
+			imd.Color = colornames.Pink
+			imd.Push(
+				pixel.V(x*ScalingFactor, DisplayHeight-(y*ScalingFactor)),
+				pixel.V((x+1)*ScalingFactor, DisplayHeight-((y+1)*ScalingFactor)),
+			)
+			imd.Rectangle(0)
+		}
+	}
 	imd.Draw(d.win)
 
 	d.win.Update()
