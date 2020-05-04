@@ -53,3 +53,8 @@ func (d *Display) Render(buf [BufferSize]byte) {
 
 	d.win.Update()
 }
+
+func (d *Display) Clear() {
+	d.win.Clear(colornames.Black)
+	d.win.Update()
+}
