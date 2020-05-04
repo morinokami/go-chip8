@@ -10,10 +10,11 @@ const (
 	DisplayHeight = BaseHeight * ScalingFactor
 	BufferSize    = BaseWidth * BaseHeight
 
-	FrameRate  = 16 * time.Millisecond
-	ClockSpeed = 2 * time.Millisecond
-	MemorySize = 4096
-	PCStart    = 0x200
+	FrameRate     = 16 * time.Millisecond
+	ClockSpeed    = 2 * time.Millisecond
+	MemorySize    = 4096
+	VRegisterSize = 16
+	PCStart       = 0x200
 )
 
 var FontSet = [...]byte{

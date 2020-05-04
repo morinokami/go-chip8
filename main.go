@@ -11,7 +11,7 @@ func main() {
 	emulator := chip8.New(display)
 
 	// temp
-	path, err := filepath.Abs("./chip8/IBM.ch8")
+	path, err := filepath.Abs("./games/IBM")
 	if err != nil {
 		panic(err)
 	}
