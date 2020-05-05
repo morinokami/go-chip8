@@ -12,6 +12,8 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
+    - name: Get pixel dependencies
+      run: sudo apt install libgl1-mesa-dev xorg-dev
 
     - name: Set up Go 1.x
       uses: actions/setup-go@v2
