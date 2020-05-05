@@ -10,8 +10,9 @@ const (
 	DisplayHeight = BaseHeight * ScalingFactor
 	BufferSize    = BaseWidth * BaseHeight
 
-	FrameRate     = 16 * time.Millisecond
+	FrameRate     = 32 * time.Millisecond
 	ClockSpeed    = 2 * time.Millisecond
+	TimerSpeed    = 20 * time.Millisecond
 	MemorySize    = 4096
 	VRegisterSize = 16
 	PCStart       = 0x200
