@@ -175,7 +175,7 @@ func (e *Emulator) decode(opcode uint16) Instruction {
 }
 
 func (e *Emulator) execute(opcode uint16, key byte, pressed bool) {
-	//e.descOpcode(opcode)
+	e.descOpcode(opcode)
 
 	inst := e.decode(opcode)
 	x := (opcode & 0x0F00) >> 8
@@ -515,7 +515,7 @@ func (e *Emulator) drawSprite(vx, vy byte, sprite []byte) bool {
 	erased := false
 	for y, b := range sprite {
 		for x, bit := range bits(b) {
-			erased = e.drawPixel(x+int(vx), y+int(vy), bit == 1)
+			erased = e.drawPixel(x+int(vx), y+int(vy), bit == 1) || erased
 		}
 	}
 	return erased
