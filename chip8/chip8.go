@@ -2,7 +2,6 @@ package chip8
 
 import (
 	"fmt"
-	"io/ioutil"
 	"math/rand"
 	"time"
 )
@@ -23,7 +22,7 @@ func New(d *Display) *Emulator {
 	return &Emulator{display: d, pc: PCStart}
 }
 
-func (e *Emulator) Load(rom string) {
+func (e *Emulator) Load(rom []byte) {
 	// clear memory
 	for i := range e.memory {
 		e.memory[i] = 0
@@ -35,11 +34,7 @@ func (e *Emulator) Load(rom string) {
 	}
 
 	// load rom into memory
-	data, err := ioutil.ReadFile(rom)
-	if err != nil {
-		panic(err)
-	}
-	for i, b := range data {
+	for i, b := range rom {
 		e.memory[PCStart+i] = b
 	}
 }
