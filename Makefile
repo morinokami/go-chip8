@@ -2,7 +2,7 @@ all: build
 
 .PHONY: build
 build: build_games
-	go build
+	go build -v .
 
 .PHONY: run
 run: build_games
